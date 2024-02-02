@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../front/img/estrela.jpg.png"type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <title>Papelaria Estrela</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Listar todos os clientes</h1>
+            <a href="./index.html">Listar todos</a>
+            <a href="./form.html">Cadastrar</a>
+        </nav>
+    </header>
+    <!-- <nav>
+        <a href="./index.html">Listar todos</a>
+        <a href="./form.html">Cadastrar</a>
+    </nav> -->
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                </tr>
+            </thead>
+            <tbody id="dados">
+            </tbody>
+        </table>
+    </main>
+    <footer></footer>
+</body>
+<script>
+    const dados = document.getElementById('dados');
+    fetch('http://localhost:3000/clientes')
+        .then(res => res.json())
+        .then(res => {
+            res.forEach(cli => {
+                dados.innerHTML += `
+                    <tr>
+                        <td>${cli.id}</td>
+                        <td>${cli.produto}</td>
+                        <td>${cli.quantidade} </td>
+                        <td>${cli.descricao}</td>
+                        <td>${cli.preco}</td>
+                    </tr>
+                `;
+            });
+        });
+</script>
+</html>

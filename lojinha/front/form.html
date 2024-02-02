@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="../front/img/estrela.jpg.png"type="image/x-icon">
+    <title>Papelaria Estrela</title>
+</head>
+
+<body>
+    <header>
+
+        <nav>
+            <div class="logo">
+                <img class="img" src="../front/img/estrela.jpg.png" width="110px">
+                <h2 class="logo">Papelaria Estrela</h2>
+            </div>
+            <a href="./index.html">Listar todos</a>
+            <a href="./form.html">Cadastrar</a>
+        </nav>
+    </header>
+
+    <main>
+        <form action="http://localhost:3000/clientes" method="post">
+            <div class="nome">
+                <h3 class="cadastro">Cadastro de Produtos</h3>
+            </div>
+            <h5>Produto</h5>
+            <input type="text" name="produto" placeholder="produto" required>
+            <h5>Quantidade</h5>
+            <input type="number" name="quantidade" placeholder="quantidade" required>
+            <h5>Descrição</h5>
+            <input type="text" name="descricao" placeholder="descrição" required>
+            <h5>Preço</h5>
+            <input type="float" name="preco" placeholder="preço" required>
+            <input class="enviar" type="submit" value="Enviar">
+        </form>
+    </main>
+    <footer>
+        <!-- <h2>By Mirella</h2> -->
+    </footer>
+</body>
+
+</html>
