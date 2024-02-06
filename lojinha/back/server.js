@@ -28,7 +28,7 @@ const create = (req, res) => {
         if(err)
             res.redirect("http://127.0.0.1:5500/lojinha/front/erro.html?erro=Provalmente o produto já está cadastrado&err="+err.code);
         else
-            res.redirect("http://127.0.0.1:5500/lojinha/front/index.html");
+            res.redirect("http://127.0.0.1:5500/front/index.html");
     });
 }
 
