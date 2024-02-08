@@ -24,9 +24,9 @@ const create = (req, res) => {
     let preco = req.body.preco;
     let query = `INSERT INTO Produtos(produto, quantidade, descricao, preco) VALUE`;
     query += `('${produto}', '${quantidade}', '${descricao}', '${preco}');`;
-    con.query(query,(err, result)=>{
-        if(err)
-            res.redirect("http://127.0.0.1:5500/lojinha/front/erro.html?erro=Provalmente o produto já está cadastrado&err="+err.code);
+    con.query(query, (err, result) => {
+        if (err)
+            res.redirect("http://127.0.0.1:5500/front/erro.html?erro=Provalmente o produto já está cadastrado&err=" + err.code);
         else
             res.redirect("http://127.0.0.1:5500/front/index.html");
     });
@@ -34,11 +34,47 @@ const create = (req, res) => {
 
 //CRUD - Read
 const read = (req, res) => {
-    con.query("SELECT * FROM Produtos ORDER BY id DESC",(err, result)=>{
-        if(err)
+    con.query("SELECT * FROM Produtos ORDER BY id DESC", (err, result) => {
+        if (err)
             res.json(err);
         else
             res.json(result);
+    });
+}
+
+//CRUD - Update 
+const update = (req, res) => {
+    let id = req.params.id;
+    let produto = req.body.produto;
+    let quantidade = req.body.quantidade;
+    let descricao = req.body.descricao;
+    let preco = req.body.preco;
+    let query = `UPDATE Produtos SET produto = '${produto}', quantidade = '${quantidade}', descricao = '${descricao}', preco = '${preco}' WHERE id = ${id};`;
+    con.query(query, (err, result) => {
+        if (err)
+            res.redirect("http://127.0.0.1:5500/front/erro.html?erro=Provalmente o produto já está cadastrado&err=" + err.code);
+        else {
+            if (result.affectedRows == 0)
+                res.redirect("http://127.0.0.1:5500/front/erro.html?erro=Nada foi alterado");
+            else
+                res.json("Atualizado com sucesso!");
+
+        }
+    });
+}
+
+//CRUD - Delete
+const del = (req, res) => {
+    let id = Number(req.params.id);
+    con.query(`DELETE FROM produtos WHERE id=${id}`, (err, result) => {
+        if (err)
+            res.redirect("http://127.0.0.1:5500/front/erro.html?erro=Erro ao excluir&err=" + err.code);
+        else {
+            if (result.affectedRows == 0)
+                res.redirect("http://127.0.0.1:5500/front/erro.html?erro=Nada foi excluído");
+            else
+                res.json("Atualizado com sucesso!");
+        }
     });
 }
 
@@ -52,6 +88,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/", teste);
 app.post("/clientes", create);
 app.get("/clientes", read);
+app.delete("/clientes/:id", del);
+app.put("/clientes/:id", update);
 
 //Teste e porta no console
 app.listen(3000, () => {

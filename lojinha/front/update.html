@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="../front/img/estrela.jpg.png" type="image/x-icon">
+    <title>Papelaria Estrela</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img class="img" src="../front/img/estrela.jpg.png" width="110px">
+                <h2 class="logo">Papelaria Estrela</h2>
+            </div>
+            <a href="./index.html">Listar todos</a>
+            <a href="./form.html">Cadastrar</a>
+        </nav>
+    </header>
+
+    <main>
+        <form id="update">
+            <input type="text" name="id" id="id" disabled>
+            <h5>Produto</h5>
+            <input type="text" name="produto" placeholder="produto" id="produto" required>
+            <h5>Quantidade</h5>
+            <input type="number" name="quantidade" placeholder="quantidade" id="quantidade" required>
+            <h5>Descrição</h5>
+            <input type="text" name="descricao" placeholder="descrição" id="descrição" required>
+            <h5>Preço</h5>
+            <input type="float" name="preco" placeholder="preço" id="preço" required>
+            <input class="enviar" type="submit" value="Enviar">
+        </form>
+    </main>
+    <footer></footer>
+
+</body>
+<script>
+    //Obter os dados da URL (via query string)
+    const url = window.location.search
+    const params = new URLSearchParams(url)
+    document.querySelector("#id").value = params.get('id');
+    document.querySelector("#produto").value = params.get('produto');
+    document.querySelector("#quantidade").value = params.get('quantidade');
+    document.querySelector("#descricao").value = params.get('descricao');
+    document.querySelector("#preço").value = params.get('preco');
+
+    const update = document.getElementById('update');
+    update.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const id = document.querySelector("#id").value;
+        const produto = document.querySelector("#produto").value;
+        const quantidade = document.querySelector("#quantidade").value;
+        const descricao = document.querySelector("#descricao").value;
+        const preco = document.querySelector("#preço").value;
+        fetch('http://localhost:3000/clientes/'+id, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ produto, quantidade, descricao, preco })
+        })
+            .then(res => res.json())
+            .then(res => {
+                if (res.erro) {
+                    window.location.href = './erro.html?erro=' + res.erro + '&err=' + res.err;
+                } else {
+                    window.location.href = './index.html';
+                }
+            });
+    });
+</script>
+
+</html>

@@ -4,7 +4,7 @@ create database papelaria;
 use papelaria;
 create table Produtos(
     id integer primary key auto_increment,
-    produto varchar(50) not null,
+    produto varchar(50) not null unique,
     quantidade integer(4) not null,
     descricao varchar(150) not null,
     preco float(3,2) not null

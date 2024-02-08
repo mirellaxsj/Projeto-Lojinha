@@ -10,16 +10,18 @@
 
 <body>
     <header>
-        <h1>Listar todos os produtos</h1>
+        <nav>
+            <div class="logo">
+                <img class="img" src="../front/img/estrela.jpg.png" width="110px">
+                <h2 class="logo">Papelaria Estrela</h2>
+            </div>
+            <a href="./index.html">Listar todos</a>
+            <a href="./form.html">Cadastrar</a>
+        </nav>
     </header>
-    <nav>
-        <a href="./index.html">Listar todos</a>
-        <a href="./form.html">Cadastrar</a>
-    </nav>
     <main>
         <h2 id="erro"></h2>
     </main>
-    <footer>by Mirella</footer>
 </body>
 <script>
     //Obter a mensagem de erro da URL
@@ -30,5 +32,4 @@
     document.querySelector('#erro').innerHTML = msg
     document.querySelector('#erro').innerHTML += "<br>Código do erro:" + cod
 </script>
-
 </html>
